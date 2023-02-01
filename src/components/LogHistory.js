@@ -6,7 +6,7 @@ function LogHistory() {
 
   useEffect(() => {
     getMessages(setLog);
-  }, []);
+  }, [log]);
 
   return (
     <div>
@@ -15,7 +15,7 @@ function LogHistory() {
           <div className="rows">
             {log.map((log) => (
               <div className="row is-3">
-                <div key={log.date}>
+                <div key={log.date + Math.random()}>
                   <p>Category: {log.category}</p>
                   <p>Message: {log.content}</p>
                   <p>Date: {new Date(log.dateTime).toLocaleString()}</p>

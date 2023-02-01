@@ -1,23 +1,16 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "http://localhost:3000",
-});
-
 const getCategories = (setCategories) => {
-  api.get("api/messages/categories").then(({data}) => {
+  axios.get("http://localhost:3000/api/messages/categories").then(({data}) => {
     setCategories(data);
   });
 };
 
 const createMessage = (category, message) => {
-  api
-    .post("api/messages", {
+  axios
+    .post("http://localhost:3000/api/messages", {
       category,
       message,
-    })
-    .then((response) => {
-      console.log(response);
     })
     .catch((error) => {
       console.log(error);
@@ -25,7 +18,7 @@ const createMessage = (category, message) => {
 };
 
 const getMessages = (setLog) => {
-  api.get("api/messages").then(({data}) => {
+  axios.get("http://localhost:3000/api/messages").then(({data}) => {
     setLog(data);
   });
 };

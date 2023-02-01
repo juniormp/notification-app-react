@@ -9,7 +9,7 @@ function NotificatioForm() {
 
   useEffect(() => {
     getCategories(setCategories);
-  }, []);
+  }, [categories]);
 
   const handleSelectChange = (event) => {
     setCategory(event.target.value);
@@ -28,7 +28,6 @@ function NotificatioForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(notification.category.trim().length);
     if (notification.message.trim().length !== 0) {
       createMessage(category, notification.message);
     } else if (notification.message.trim().length === 0) {
