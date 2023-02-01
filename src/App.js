@@ -1,5 +1,6 @@
-import LogHistory from "./components/LogHistory/LogHistory";
-import NotificatioForm from "./components/NotificationForm/NotificationForm";
+import LogHistory from "./components/LogHistory";
+import NotificatioForm from "./components/NotificationForm";
+import "bulma/css/bulma.css";
 
 function App() {
   return (
