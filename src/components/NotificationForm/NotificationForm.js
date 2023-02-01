@@ -5,6 +5,7 @@ function NotificatioForm() {
   const [categories, setCategories] = useState([]);
   const [notification, setNotification] = useState({category: "", message: ""});
   const [category, setCategory] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     getCategories(setCategories);
@@ -18,16 +19,23 @@ function NotificatioForm() {
     });
   };
 
-  const handleTextChange = (e) =>
+  const handleTextChange = (event) =>
     setNotification({
       category,
-      message: e.target.value,
+      message: event.target.value,
     });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(category);
-    createMessage(category, notification.message);
+
+    console.log(notification.category.trim().length);
+    if (notification.message.trim().length !== 0) {
+      createMessage(category, notification.message);
+    } else if (notification.message.trim().length === 0) {
+      setError(event.target.value ? null : "Message cannot be empty");
+    } else if (notification.category.trim().length === 0) {
+      setError(event.target.value ? null : "Category cannot be empty");
+    }
   };
 
   return (
@@ -55,6 +63,7 @@ function NotificatioForm() {
               value={notification.message}
               onChange={handleTextChange}
             />
+            {error && <div style={{color: "red"}}>{error}</div>}
           </label>
         </div>
         <button onClick={handleSubmit}>Send Message</button>
