@@ -1,32 +1,14 @@
-import {useEffect, useState} from "react";
-import {getMessages} from "../services/api";
-
-function LogHistory() {
-  const [log, setLog] = useState([]);
-
-  useEffect(() => {
-    getMessages(setLog);
-  }, [log]);
-
+function LogHistory({log}) {
   return (
-    <div>
-      <div className="container">
-        <section className="section">
-          <div className="rows">
-            {log.map((log) => (
-              <div className="row is-3">
-                <div key={log.date + Math.random()}>
-                  <p>Category: {log.category}</p>
-                  <p>Message: {log.content}</p>
-                  <p>Date: {new Date(log.dateTime).toLocaleString()}</p>
-                </div>
-                <br />
-              </div>
-            ))}
-          </div>
-        </section>
-      </div>
-    </div>
+    <ul>
+      {log?.map((log) => (
+        <li key={Math.random()}>
+          <strong>Category:</strong> {log.category}
+          <br />
+          <strong>Message:</strong> {log.content}
+        </li>
+      ))}
+    </ul>
   );
 }
 

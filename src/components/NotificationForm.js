@@ -1,84 +1,64 @@
 import {useEffect, useState} from "react";
-import {getCategories, createMessage} from "../services/api";
+import {createMessage, getCategories, getMessages} from "../services/api.js";
+import LogHistory from "../components/LogHistory.js";
 
 function NotificatioForm() {
   const [categories, setCategories] = useState([]);
-  const [notification, setNotification] = useState({category: "", message: ""});
+  const [message, setMessage] = useState("");
   const [category, setCategory] = useState("");
-  const [error, setError] = useState(null);
+  const [log, setLog] = useState();
+
+  useEffect(() => {
+    getMessages(setLog);
+  }, []);
 
   useEffect(() => {
     getCategories(setCategories);
-  }, [categories]);
-
-  const handleSelectChange = (event) => {
-    setCategory(event.target.value);
-    setNotification({
-      category: event.target.value,
-      message: notification.message,
-    });
-  };
-
-  const handleTextChange = (event) =>
-    setNotification({
-      category,
-      message: event.target.value,
-    });
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (notification.message.trim().length !== 0) {
-      createMessage(category, notification.message);
-    } else if (notification.message.trim().length === 0) {
-      setError(event.target.value ? null : "Message cannot be empty");
-    } else if (notification.category.trim().length === 0) {
-      setError(event.target.value ? null : "Category cannot be empty");
+    if (!message || !category) {
+      alert("Please enter a message and category.");
+      return;
     }
+    createMessage(category, message);
   };
 
   return (
     <div>
-      <section className="hero is-primary">
-        <div className="hero-body">
-          <p className="title">Notification System</p>
-        </div>
-      </section>
-      <div className="container">
-        <section className="section">
-          <form>
-            <div>
-              <label>
-                Category
-                <select
-                  name="category"
-                  id="category"
-                  onChange={handleSelectChange}
-                >
-                  <option value="choose" disabled selected="selected">
-                    Select Category
-                  </option>
-                  {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <br />
-              <label>
-                Message
-                <textarea
-                  value={notification.message}
-                  onChange={handleTextChange}
-                />
-                {error && <div style={{color: "red"}}>{error}</div>}
-              </label>
-            </div>
-            <button onClick={handleSubmit}>Send Message</button>
-          </form>
-        </section>
-      </div>
+      <form>
+        <label>
+          Category:
+          <select
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
+          >
+            <option hidden value="">
+              Select Category
+            </option>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+        </label>
+        <br />
+        <label>
+          Message:
+          <textarea
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+          />
+        </label>
+        <br />
+        <button onClick={handleSubmit} type="button">
+          Submit
+        </button>
+      </form>
+      <hr />
+      <LogHistory log={log} />
     </div>
   );
 }
