@@ -1,13 +1,16 @@
 function LogHistory({log}) {
   return (
-    <section class="hero is-primary is-fullheight">
-      <div class="hero-body">
-        <div class="content">
+    <section className="hero is-primary is-fullheight">
+      <div className="hero-body">
+        <div className="content">
           {log?.map((log) => (
-            <div class="columns is-gapless">
-              <div class="card">
-                <div class="card-content is-large">
-                  <label class="label">
+            <div
+              className="columns is-gapless"
+              key={log.category + log.content}
+            >
+              <div className="card">
+                <div className="card-content is-large">
+                  <label className="label">
                     <strong>{log.category}</strong>
                     <br />
                     <strong>{log.content}</strong>

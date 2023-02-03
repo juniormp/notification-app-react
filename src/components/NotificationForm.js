@@ -27,17 +27,17 @@ function NotificatioForm() {
 
   return (
     <section class="hero is-primary is-fullheight">
-      <div class="hero-body">
-        <div class="container">
-          <div class="columns is-5-tablet is-4-desktop is-3-widescreen">
-            <div class="column">
-              <form class="box">
-                <div class="field has-text-centered">
-                  <label class="label">Notification App</label>
+      <div className="hero-body">
+        <div className="container">
+          <div className="columns is-5-tablet is-4-desktop is-3-widescreen">
+            <div className="column">
+              <form className="box">
+                <div className="field has-text-centered">
+                  <label className="label">Notification App</label>
                 </div>
-                <div class="field">
-                  <label class="label">Category</label>
-                  <div class="select is-primary">
+                <div className="field">
+                  <label className="label">Category</label>
+                  <div className="select is-primary">
                     <select
                       value={category}
                       onChange={(event) => setCategory(event.target.value)}
@@ -54,20 +54,20 @@ function NotificatioForm() {
                   </div>
                   <br />
                   <br />
-                  <div class="field">
-                    <label class="label">
+                  <div className="field">
+                    <label className="label">
                       Message
                       <textarea
-                        class="textarea"
+                        className="textarea"
                         placeholder="Describe your message"
                         value={message}
                         onChange={(event) => setMessage(event.target.value)}
                       />
                     </label>
                   </div>
-                  <div class="field">
+                  <div className="field">
                     <button
-                      class="button is-success"
+                      className="button is-success"
                       onClick={handleSubmit}
                       type="button"
                     >
