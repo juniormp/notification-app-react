@@ -26,7 +26,7 @@ function NotificatioForm() {
   };
 
   return (
-    <section class="hero is-primary is-fullheight">
+    <section className="hero is-primary is-fullheight">
       <div className="hero-body">
         <div className="container">
           <div className="columns is-5-tablet is-4-desktop is-3-widescreen">
