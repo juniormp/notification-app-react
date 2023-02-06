@@ -6,7 +6,7 @@ function LogHistory({log}) {
           {log?.map((log) => (
             <div
               className="columns is-gapless"
-              key={log.category + log.content}
+              key={log.category + Math.random()}
             >
               <div className="card">
                 <div className="card-content is-large">
